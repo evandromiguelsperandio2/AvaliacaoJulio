@@ -29,12 +29,13 @@ pip3 install streamlit pandas matplotlib
 
 4. Enviar ou criar o arquivo app.py
 Você pode usar scp para enviar arquivos:
-scp -i "sua-chave.pem" app.py ubuntu@<IP-da-instância>:/home/ubuntu/
-scp -i "sua-chave.pem" dataset.csv ubuntu@<IP-da-instância>:/home/ubuntu/
+scp -i admin.pem app.py ubuntu@44.203.254.93:/home/ubuntu/app.py
+scp -i admin.pem "MS_Financial_Sample.csv" ubuntu@44.203.254.93:/home/ubuntu/AvaliacaoJulio/
 
 Ou clone diretamente do GitHub (se já estiver publicado):
-git clone https://github.com/seu-usuario/nome-do-repo.git
-cd nome-do-repo
+git clone https://github.com/evandromiguelsperandio2/AvaliacaoJulio
+cd AvaliacaoJulio
+
 5. Rodar a aplicação Streamlit
 streamlit run app.py --server.port=8501 --server.address=0.0.0.0
 
@@ -48,7 +49,7 @@ Python 3.8+
 pip
 
 Instalação:
-git clone https://github.com/seu-usuario/nome-do-repo.git
+git clone https://github.com/evandromiguelsperandio2/AvaliacaoJulio
 cd nome-do-repo
 pip install -r requirements.txt
 
