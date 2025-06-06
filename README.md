@@ -1,61 +1,80 @@
-# AvaliacaoJulio
+# Deploy de Aplicação Streamlit na AWS EC2
 
-# 📊 Projeto de Avaliação - Streamlit na AWS EC2
+Este projeto demonstra como criar e hospedar uma aplicação Streamlit simples em uma instância EC2 da AWS, utilizando Ubuntu 22.04 ou superior. A aplicação exibe um título, um texto e um gráfico gerado a partir de um dataset.
 
-Este projeto tem como objetivo demonstrar a criação e o deploy de uma aplicação simples utilizando a biblioteca **Streamlit** em uma instância **EC2 da AWS**, permitindo acesso público via navegador. A aplicação carrega e exibe dados de um arquivo CSV, gerando uma visualização interativa.
+## 🚀 Objetivo
 
----
-
-## ✅ Objetivo da Avaliação
-
-- Criar uma instância EC2 com Ubuntu 22.04 ou superior.
-- Instalar Python, pip e dependências.
-- Configurar o ambiente para rodar uma aplicação Streamlit.
-- Subir uma aplicação que lê um CSV e mostra visualizações.
-- Tornar a aplicação acessível via navegador (porta 8501).
-- Subir o código no GitHub com um README explicativo.
+Tornar uma aplicação Streamlit acessível publicamente por meio de um navegador, utilizando uma instância EC2 na AWS.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Passo a Passo
 
-- Python 3.12
-- Streamlit
-- Pandas
-- Matplotlib
-- AWS EC2 (Ubuntu Server)
-- Git
+### 1. Criar Instância EC2
+- Sistema operacional: **Ubuntu Server 22.04 ou superior**
+- Tipo de instância: `t2.micro` (para fins de teste)
+- Grupo de Segurança: libere as portas:
+  - `22` (SSH)
+  - `8501` (Streamlit)
 
----
+### 2. Conectar via SSH
 
-## 📁 Estrutura do Projeto
+chmod 400 sua-chave.pem
+ssh -i "sua-chave.pem" ubuntu@<IP-da-instância>
+3. Instalar Python, pip e dependências
 
-AvaliacaoJulio/
-├── app.py # Aplicação Streamlit
-├── MS_Financial_Sample.csv # Arquivo de dados
-├── requirements.txt # Lista de dependências
-└── README.md # Este arquivo
+sudo apt update && sudo apt upgrade -y
+sudo apt install python3 python3-pip -y
+pip3 install streamlit pandas matplotlib
 
----
+4. Enviar ou criar o arquivo app.py
+Você pode usar scp para enviar arquivos:
+scp -i "sua-chave.pem" app.py ubuntu@<IP-da-instância>:/home/ubuntu/
+scp -i "sua-chave.pem" dataset.csv ubuntu@<IP-da-instância>:/home/ubuntu/
 
-## 🚀 Como Rodar o Projeto Localmente
+Ou clone diretamente do GitHub (se já estiver publicado):
+git clone https://github.com/seu-usuario/nome-do-repo.git
+cd nome-do-repo
+5. Rodar a aplicação Streamlit
+streamlit run app.py --server.port=8501 --server.address=0.0.0.0
 
-### 1. Clone o repositório
+🌐 Acessar Aplicação no Navegador
+Abra no navegador:
+http://<IP-da-instância>:8501
 
-bash
-git clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
-cd SEU_REPOSITORIO
+📄 Como Rodar Localmente
+Requisitos:
+Python 3.8+
+pip
 
-### 2. (Opcional) Crie um ambiente virtual
-python3 -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
-
-### 3. Instale as dependências
+Instalação:
+git clone https://github.com/seu-usuario/nome-do-repo.git
+cd nome-do-repo
 pip install -r requirements.txt
 
-### 4. Execute o Streamlit
+Executar:
 streamlit run app.py
 
-Acesse em seu navegador:
-http://localhost:8501
+📁 Estrutura do Projeto
+📦nome-do-repo
+ ┣ 📄 app.py
+ ┣ 📄 dataset.csv
+ ┣ 📄 README.md
+ ┗ 📄 requirements.txt
+📦 Requisitos
+No arquivo requirements.txt, inclua:
+streamlit
+pandas
+matplotlib
+
+
+🏆 Critérios Avaliados
+Item	Pontos
+EC2 configurada corretamente	30
+Acesso público pela porta 8501	30
+Aplicação funcional com Streamlit	20
+Código limpo e funcional	10
+README com instruções detalhadas	10
+Total	100
+
+
